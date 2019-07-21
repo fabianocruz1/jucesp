@@ -26,11 +26,8 @@ class RestApiTest {
 	private static final String BANCO_ITAU = "Banco Itau";
 	private static final String NOVO_NOME = "novo nome";
 	private static final String NOVO_ESTADO_CIVIL = "Solteiro";
-	static final String CPF1 = "12345678911";
-	static final String CPF2 = "12345678922";
-//	private int numDeProtocolos = 0;
-//	private int numDeProtocolosAprovados = 0;
-//	private int numDeProtocolosRejeitados = 0;
+	private static final String CPF1 = "12345678911";
+	private static final String CPF2 = "12345678922";
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -620,148 +617,50 @@ class RestApiTest {
 
 	}
 
-//	/**
-//	 * Retorna erro ao criar funcionario já exixtente
-//	 */
-//	@Test
-//	void b() {
-//		HashMap<String, Object> funcionario = criarFuncionario(CPF1);				
-//		 
-//		Response response = given().
-//		contentType("application/json").
-//		accept("application/json").
-//		body(funcionario).
-//		when().
-//		post("/funcionarios").
-//		then().
-//		statusCode(200).
-//		contentType("application/json").
-//		extract().
-//		response();
-//		
-//		String idStr = response.jsonPath().getString("id");
-//		assertTrue(null == idStr);
-//
-//	}
-//	
-//	/**
-//	 * Retorna erro ao tentar criar funcionario com dados incompletos
-//	 */
-//	@Test
-//	void c() {
-//		HashMap<String, Object> funcionario = criarFuncionario(null);				
-//		
-//		Response response = given().
-//		contentType("application/json").
-//		accept("application/json").
-//		body(funcionario).
-//		when().
-//		post("/funcionarios").
-//		then().
-//		statusCode(500).
-//		contentType("application/json").
-//		extract().
-//		response();
-//		
-//		String idStr = response.jsonPath().getString("id");
-//		assertTrue(null == idStr);
-//
-//	}
-//
-//	/**
-//	 * Lista Funcionarios/1
-//	 */
-//	@Test
-//	void d() {
-//		Response response = given().
-//		contentType("application/json").
-//		accept("application/json").
-//		when().
-//		get("/funcionarios/1").
-//		then().
-//		statusCode(200).
-//		contentType("application/json").
-//		extract().
-//		response();
-//		
-//		String idStr = response.jsonPath().getString("id");
-//		assertNotNull(idStr);
-//
-//		Integer id = Integer.parseInt(idStr);
-//		assertNotNull(idStr);
-//		assertTrue(id > 0);
-//
-//		String dadosBancariosStr = response.jsonPath().getString("dadosBancarios");
-//		assertNotNull(dadosBancariosStr);
-//
-//		String telefonesStr = response.jsonPath().getString("telefones");
-//		assertNotNull(telefonesStr);
-//
-//		String enderecoStr = response.jsonPath().getString("endereco");
-//		assertNotNull(enderecoStr);
-//
-//		
-//	}
-//
-//
-//	/**
-//	 * Atualiza funcionario 1
-//	 */
-//	@Test
-//	void e() {
-//		HashMap<String, Object> funcionario = criarFuncionario(CPF1);				
-//		funcionario.replace("nome", NOVO_NOME);
-//		
-//		Response response = given().
-//		contentType("application/json").
-//		accept("application/json").
-//		body(funcionario).
-//		when().
-//		put("/funcionarios/1").
-//		then().
-//		statusCode(200).
-//		contentType("application/json").
-//		extract().
-//		response();
-//		
-//		String idStr = response.jsonPath().getString("id");
-//		assertNotNull(idStr);
-//
-//		Integer id = Integer.parseInt(idStr);
-//		assertNotNull(idStr);
-//		assertTrue(id == 1);
-//
-//		String nome = response.jsonPath().getString("nome");
-//		assertNotNull(nome);
-//		assertTrue(NOVO_NOME.equalsIgnoreCase(nome));
-//		
-//	}
-//
-//	/**
-//	 * Remove funcionario 1
-//	 */
-//	@Test
-//	void f() {
-//		HashMap<String, Object> funcionario = criarFuncionario(CPF1);				
-//		funcionario.replace("nome", NOVO_NOME);
-//		
-//		Response response = given().
-//		contentType("application/json").
-//		accept("application/json").
-//		body(funcionario).
-//		when().
-//		delete("/funcionarios/1").
-//		then().
-//		statusCode(200).
-//		contentType("application/json").
-//		extract().
-//		response();
-//		
-//		String idStr = response.jsonPath().getString("id");
-//		assertTrue(idStr == null);
-//	}
+	/**
+	 * Retorna erro ao criar funcionario já exixtente
+	 */
+	@Test
+	void w1() {
+		HashMap<String, Object> funcionario = criarFuncionario(CPF1);				
+		
+		Response response = given().
+		contentType("application/json").
+		accept("application/json").
+		body(funcionario).
+		when().
+		post("/funcionarios").
+		then().
+		statusCode(500).
+		contentType("application/json").
+		extract().
+		response();
+		
+	}
+	
 
-
+	/**
+	 * Retorna erro ao criar funcionario com dados incompletos
+	 */
+	@Test
+	void w2() {
+		HashMap<String, Object> funcionario = criarFuncionario(CPF1);				
+		funcionario.replace("nome", null);
+		
+		Response response = given().
+		contentType("application/json").
+		accept("application/json").
+		body(funcionario).
+		when().
+		post("/funcionarios").
+		then().
+		statusCode(500).
+		contentType("application/json").
+		extract().
+		response();
+		
+	}
+	
 	private HashMap<String, Object> criarFuncionario(Object cpf) {
 		List<HashMap<String, Object>> telefones = new ArrayList<>();
 		
